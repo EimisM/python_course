@@ -1,0 +1,5 @@
+user_input = input("Please enter your sentence ")
+print(user_input)
+print(user_input[::-1])
+print(user_input.upper())
+print(user_input[::2])
