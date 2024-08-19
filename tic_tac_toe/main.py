@@ -25,8 +25,8 @@ def load_game() -> None:
 def choose_symbol() -> str:
     while True:
         symbol = input("Choose your symbol (O or X): ")
-        if symbol in ("X", "O"):
-            return symbol
+        if symbol in ("X", "x", "O", "o"):
+            return symbol.upper()
         print("Invalid choice. Please select O or X.")
 
 # Define Board class that will be used for the game
