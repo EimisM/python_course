@@ -171,7 +171,7 @@ def play_game() -> None:
             current_player = "O" if current_player == "X" else "X"
         
         restart = input("Would you like to restart the game and play again? (Y/N) ")
-        if restart != "Y":
+        if restart != "Y" and restart != "y":
             print("Thank you for playing the game!")
             break
         
