@@ -122,51 +122,58 @@ def ai_move(board: Board, player: str) -> None:
         
 # Main game loop
 def play_game() -> None:
-    load_game()
-    board = Board()
-    
-    # Define a player symbol with the use of choose_symbol function
-    player1_symbol = choose_symbol()
-    player2_symbol = "O" if player1_symbol == "X" else "X"
-    os.system("clear")
-    
-    # Print what symbol 
-    print(f"Player will be playing {player1_symbol}")
-    print(f"AI will be playing as {player2_symbol}")
-    time.sleep(2)
-    
-    # Define current_player variable so that the player is always first to start
-    current_player = player1_symbol
-    
-    # Start an endless loop
     while True:
-        # Refresh the screen to keep it clean
-        refresh_screen(board)
+        load_game()
+        board = Board()
         
-        # Gather inputs required for the player to make a move
-        if current_player == player1_symbol:
-            # Gather user input on what cell they'd like to make a move at
-            cell_no = board.get_user_cell_no()
-            # Update the board with new player move
-            board.update_cell(cell_no, current_player)
-        else:
-            # Request AI move if its AI's turn.
-            ai_move(board, player2_symbol)
+        # Define a player symbol with the use of choose_symbol function
+        player1_symbol = choose_symbol()
+        player2_symbol = "O" if player1_symbol == "X" else "X"
+        os.system("clear")
         
-        # Define a winner variable while calling check_win validation
-        winner = board.check_win()
+        # Print what symbol 
+        print(f"Player will be playing {player1_symbol}")
+        print(f"AI will be playing as {player2_symbol}")
+        time.sleep(2)
         
-        # If there's a winner run this part of the code
-        if winner:
+        # Define current_player variable so that the player is always first to start
+        current_player = player1_symbol
+        
+        # Start an endless loop
+        while True:
+            # Refresh the screen to keep it clean
             refresh_screen(board)
-            print(f"Player {winner} has won the game!")
+            
+            # Gather inputs required for the player to make a move
+            if current_player == player1_symbol:
+                # Gather user input on what cell they'd like to make a move at
+                cell_no = board.get_user_cell_no()
+                # Update the board with new player move
+                board.update_cell(cell_no, current_player)
+            else:
+                # Request AI move if its AI's turn.
+                ai_move(board, player2_symbol)
+            
+            # Define a winner variable while calling check_win validation
+            winner = board.check_win()
+            
+            # If there's a winner run this part of the code
+            if winner:
+                refresh_screen(board)
+                print(f"Player {winner} has won the game!")
+                break
+            
+            # If there's no winner and there's no more empty cells left, run this code.
+            elif board.is_full():
+                refresh_screen(board)
+                print("The game is a draw")
+                break
+            current_player = "O" if current_player == "X" else "X"
+        
+        restart = input("Would you like to restart the game and play again? (Y/N) ")
+        if restart != "Y":
+            print("Thank you for playing the game!")
             break
         
-        # If there's no winner and there's no more empty cells left, run this code.
-        elif board.is_full():
-            refresh_screen(board)
-            print("The game is a draw")
-            break
-        current_player = "O" if current_player == "X" else "X"
 
 play_game()
