@@ -97,7 +97,7 @@ def ai_move(board: Board, player: str) -> None:
     if board.cells[5] == " ":
         move = 5
     else:
-        available_moves = [i for i, x in enumerate(board.cells) if x == " " and i != 0] # Iterates over cells in class object to find empty cells
+        available_moves = [i for i, x in enumerate(board.cells) if x == " " and i != 0]
         move = random.choice(available_moves)
     board.update_cell(move, player)
         
